@@ -13,10 +13,12 @@ mqttClient.on("connect", () => {
 });
 
 mqttClient.on("error", (error) => {
-  console.error(
-    "Firmware controller MQTT error:",
-    error.message
-  );
+  if (error.code !== "ECONNREFUSED") {
+    console.error(
+      "Firmware controller MQTT error:",
+      error.message
+    );
+  }
 });
 
 // Start firmware update

@@ -13,6 +13,7 @@ const authRoutes = require("./routes/authRoutes");
 
 const { startHealthMonitor } = require("./services/healthMonitor");
 const { startSubscriber } = require("./mqtt/subscriber");
+const { startBroker } = require("./mqtt/broker");
 
 const app = express();
 
@@ -41,7 +42,10 @@ io.on("connection", (socket) => {
 // Make io available to other backend modules
 app.set("io", io);
 
-startSubscriber(io);
+// Start Embedded MQTT Broker & Telemetry Subscriber
+startBroker().then(() => {
+  startSubscriber(io);
+});
 
 // Connect MongoDB
 connectDB();

@@ -418,7 +418,9 @@ const startSubscriber = (io) => {
   });
 
   client.on("error", (error) => {
-    console.error("MQTT error:", error.message);
+    if (error.code !== "ECONNREFUSED") {
+      console.error("MQTT error:", error.message);
+    }
   });
 };
 
