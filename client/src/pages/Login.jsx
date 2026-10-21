@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ShieldCheck, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { useRole } from "../context/RoleContext";
+import { API_BASE_URL } from "../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function Login() {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${API_BASE_URL}/auth/login`,
         {
           email,
           password,

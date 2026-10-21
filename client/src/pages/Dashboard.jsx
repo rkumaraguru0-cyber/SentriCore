@@ -23,6 +23,7 @@ import {
   getDevices,
   getSecurityEvents,
   getIncidents,
+  BACKEND_URL,
 } from "../services/api";
 
 function Dashboard() {
@@ -60,7 +61,7 @@ function Dashboard() {
   // REAL-TIME SOCKET.IO DEVICE & THREAT UPDATES
   // ==================================================
   useEffect(() => {
-    const socket = io("http://localhost:5000", {
+    const socket = io(BACKEND_URL, {
       transports: ["polling", "websocket"],
     });
 

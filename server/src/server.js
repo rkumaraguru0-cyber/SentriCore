@@ -25,7 +25,7 @@ const { Server } = require("socket.io");
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "*",
     methods: ["GET", "POST", "PATCH"],
   },
 });
@@ -61,7 +61,15 @@ app.use(
 );
 app.use("/api/auth", authRoutes);
 
-// Health Check
+// Root & Health Checks
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "SentriCore IoT Security Control Room API is live",
+    status: "healthy",
+  });
+});
+
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,

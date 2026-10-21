@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { io } from "socket.io-client";
 
-import { getIncidents, acknowledgeIncident, resolveIncident } from "../services/api";
+import { getIncidents, acknowledgeIncident, resolveIncident, BACKEND_URL } from "../services/api";
 
 function Incidents() {
   const [incidents, setIncidents] = useState([]);
@@ -35,7 +35,7 @@ function Incidents() {
 
   // Realtime incident updates
   useEffect(() => {
-    const socket = io("http://localhost:5000", {
+    const socket = io(BACKEND_URL, {
       transports: ["polling", "websocket"],
     });
 

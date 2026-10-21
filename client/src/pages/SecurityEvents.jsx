@@ -10,6 +10,7 @@ import {
   getSecurityEvents,
   acknowledgeSecurityEvent,
   resolveSecurityEvent,
+  BACKEND_URL,
 } from "../services/api";
 
 function SecurityEvents() {
@@ -38,7 +39,7 @@ function SecurityEvents() {
   }, []);
 
   useEffect(() => {
-    const socket = io("http://localhost:5000", {
+    const socket = io(BACKEND_URL, {
       transports: ["polling", "websocket"],
     });
 

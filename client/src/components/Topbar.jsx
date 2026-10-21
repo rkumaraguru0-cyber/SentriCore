@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { useTheme } from "../context/ThemeContext";
 import { useRole } from "../context/RoleContext";
+import { BACKEND_URL } from "../services/api";
 
 function Topbar() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Topbar() {
     useState(false);
 
   useEffect(() => {
-    const socket = io("http://localhost:5000", {
+    const socket = io(BACKEND_URL, {
       transports: ["polling", "websocket"],
     });
 

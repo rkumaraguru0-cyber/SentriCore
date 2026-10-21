@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { io } from "socket.io-client";
 
-import { getDevices } from "../services/api";
+import { getDevices, BACKEND_URL } from "../services/api";
 
 function Devices() {
   const [devices, setDevices] = useState([]);
@@ -51,7 +51,7 @@ function Devices() {
   // REAL-TIME SOCKET.IO DEVICE UPDATES
   // --------------------------------------------------
   useEffect(() => {
-    const socket = io("http://localhost:5000", {
+    const socket = io(BACKEND_URL, {
       transports: ["polling", "websocket"],
     });
 
