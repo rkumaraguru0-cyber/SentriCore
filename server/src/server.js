@@ -14,6 +14,7 @@ const authRoutes = require("./routes/authRoutes");
 const { startHealthMonitor } = require("./services/healthMonitor");
 const { startSubscriber } = require("./mqtt/subscriber");
 const { startBroker } = require("./mqtt/broker");
+const { startTelemetrySimulator } = require("./services/telemetrySimulator");
 
 const app = express();
 
@@ -42,9 +43,10 @@ io.on("connection", (socket) => {
 // Make io available to other backend modules
 app.set("io", io);
 
-// Start Embedded MQTT Broker & Telemetry Subscriber
+// Start Embedded MQTT Broker, Telemetry Subscriber & Continuous Simulator
 startBroker().then(() => {
   startSubscriber(io);
+  startTelemetrySimulator();
 });
 
 // Connect MongoDB
